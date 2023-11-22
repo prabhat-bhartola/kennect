@@ -1,4 +1,5 @@
 from app.config import KennectConfig
+from app.services import auth, users
 
 # from app.services import *
 from fastapi import FastAPI, Request
@@ -14,6 +15,9 @@ APIs for kennect. 🐝
 """
 
 app = FastAPI(title="kennectAPI", description=description)
+
+app.include_router(auth.router)
+app.include_router(users.router)
 
 
 @app.exception_handler(ConnectionFailure)

@@ -5,11 +5,12 @@ from app.common.models import User
 from app.config import KennectConfig
 from app.services.auth.models import CurrentUser
 from app.services.auth.utils import get_current_user
-from app.services.users.models import UserBase
 from beanie import init_beanie
 from fastapi import APIRouter, Body, Depends, HTTPException, status
 from motor.motor_asyncio import AsyncIOMotorClient
 from pymongo.errors import DuplicateKeyError
+
+from .models import UserBase
 
 router = APIRouter(prefix="/users", tags=["user"])
 

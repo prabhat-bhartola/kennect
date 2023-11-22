@@ -1,7 +1,5 @@
 from app.config import KennectConfig
-from app.services import auth, users
-
-# from app.services import *
+from app.services import auth, posts, users
 from fastapi import FastAPI, Request
 from fastapi.responses import JSONResponse
 from motor.motor_asyncio import AsyncIOMotorClient
@@ -18,6 +16,7 @@ app = FastAPI(title="kennectAPI", description=description)
 
 app.include_router(auth.router)
 app.include_router(users.router)
+app.include_router(posts.router)
 
 
 @app.exception_handler(ConnectionFailure)

@@ -11,6 +11,11 @@ class CustomBaseModel(BaseModel):
     created_at: datetime = Field(default_factory=lambda: datetime.now().isoformat())
 
 
+class UserMin(BaseModel):
+    id: UUID
+    username: str
+
+
 class User(CustomBaseModel, Document):
     username: Indexed(str, unique=True)  # type: ignore
     password: SecretStr
@@ -34,7 +39,9 @@ class User(CustomBaseModel, Document):
         json_encoders = {UUID: str}
         schema_extra = {
             "example": {
+                "_id": "757dae17-966f-4e2f-ab71-64fd4a6b1c22",
                 "username": "prabhat1811",
                 "password": "SecretStr",
+                "created_at": "2023-11-23T04:36:17.657105",
             }
         }

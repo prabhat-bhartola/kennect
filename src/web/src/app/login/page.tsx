@@ -13,9 +13,22 @@ import { Form, Formik } from "formik";
 import { useState } from "react";
 import { LoadingButton } from "@mui/lab";
 import KennectTextField from "@/common/components/kennect_text_field.component";
+import AuthService from "@/api-sdk/services/auth.service";
+import { useCookies } from "next-client-cookies";
 
 export default function Login() {
-  const handleSubmit = () => {};
+  const cookies = useCookies();
+
+  const handleSubmit = (username: string, password: string) => {
+    const data = {
+      // Make it dynamic
+      username: "prabhat1811",
+      password: "SecretStr",
+    };
+    const res = AuthService.signup(data).then((data) => {
+      cookies.set("access_token", data.access_token);
+    });
+  };
 
   return (
     <Card

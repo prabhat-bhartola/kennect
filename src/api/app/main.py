@@ -1,6 +1,7 @@
 from app.config import KennectConfig
 from app.services import auth, comments, posts, users
 from fastapi import FastAPI, Request
+from fastapi.middleware.cors import CORSMiddleware
 from fastapi.responses import JSONResponse
 from motor.motor_asyncio import AsyncIOMotorClient
 from pymongo.errors import ConnectionFailure, ExecutionTimeout
@@ -13,6 +14,16 @@ APIs for kennect. 🐝
 """
 
 app = FastAPI(title="kennectAPI", description=description)
+
+origins = ["http://localhost:3000"]
+
+app.add_middleware(
+    CORSMiddleware,
+    allow_origins=origins,
+    allow_credentials=True,
+    allow_methods=["*"],
+    allow_headers=["*"],
+)
 
 app.include_router(auth.router)
 app.include_router(users.router)

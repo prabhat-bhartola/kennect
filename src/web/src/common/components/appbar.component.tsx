@@ -7,7 +7,7 @@ import Toolbar from "@mui/material/Toolbar";
 import IconButton from "@mui/material/IconButton";
 import Typography from "@mui/material/Typography";
 
-import { Menu, MenuItem } from "@mui/material";
+import { Button, Menu, MenuItem } from "@mui/material";
 import AccountCircle from "@mui/icons-material/AccountCircle";
 import Link from "next/link";
 import { useUser } from "@/api-sdk/hooks/user.hook";
@@ -53,6 +53,14 @@ export default function KennectAppBar() {
           </Typography>
 
           <div>
+            <Button
+              color="inherit"
+              onClick={() => {
+                push("/post/create");
+              }}
+            >
+              New Post
+            </Button>
             <IconButton
               size="large"
               aria-label="account of current user"

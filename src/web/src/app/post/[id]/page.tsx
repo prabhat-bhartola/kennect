@@ -1,11 +1,12 @@
 "use client";
 
 import { FC } from "react";
-import Post from "@/common/components/post.component";
 import { Box, Divider, Typography } from "@mui/material";
 import { usePost } from "@/api-sdk/hooks/post.hook";
 import { useCommentList } from "@/api-sdk/hooks/comment.hook";
 import CreateComment from "@/common/components/create_comment.component";
+import Spinner from "@/common/components/spinner.component";
+import StaticPost from "@/common/components/static_post.component";
 
 interface pageProps {
   params: { id: string };
@@ -20,7 +21,7 @@ const Page: FC<pageProps> = ({ params }) => {
     mutate: mutateComments,
   } = useCommentList(post?._id);
 
-  if (isLoading) return;
+  if (isLoading) return <Spinner />;
 
   if (isError) {
     return <div>Error fetching post data</div>;
@@ -41,7 +42,7 @@ const Page: FC<pageProps> = ({ params }) => {
           width: { xs: "100%", md: "50%" },
         }}
       >
-        <Post
+        <StaticPost
           key={post._id}
           id={post._id}
           content={post.content}
@@ -50,16 +51,19 @@ const Page: FC<pageProps> = ({ params }) => {
         />
         <Divider sx={{ mt: "25px" }} />
         <Typography>Comments</Typography>
-        {!isLoadingComments &&
+        {isLoadingComments ? (
+          <Spinner />
+        ) : (
           comments.map((comment) => (
-            <Post
+            <StaticPost
               key={comment._id}
               id={comment._id}
               content={comment.content}
               username={comment.user.username}
               created_at={comment.created_at}
             />
-          ))}
+          ))
+        )}
         <CreateComment post_id={post._id} mutate={mutateComments} />
       </Box>
     </Box>

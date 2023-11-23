@@ -21,11 +21,12 @@ export default function Login() {
   const cookies = useCookies();
   const { push } = useRouter();
 
-  const handleSubmit = (username: string, password: string) => {
+  const handleSubmit = (values) => {
     const data = {
-      // Make it dynamic
-      username: "prabhat1811",
-      password: "SecretStr",
+      // username: "prabhat1811",
+      // password: "SecretStr",
+      username: values.username,
+      password: values.password,
     };
     AuthService.signup(data).then((data) => {
       cookies.set("access_token", data.access_token);

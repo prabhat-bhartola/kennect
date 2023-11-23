@@ -11,11 +11,10 @@ import { Button, Menu, MenuItem } from "@mui/material";
 import AccountCircle from "@mui/icons-material/AccountCircle";
 import Link from "next/link";
 import { useUser } from "@/api-sdk/hooks/user.hook";
-import { useCookies } from "next-client-cookies";
 import { useRouter } from "next/navigation";
+import Cookies from "js-cookie";
 
 export default function KennectAppBar() {
-  const cookies = useCookies();
   const { user, isLoading, isError, mutate } = useUser();
   const { push } = useRouter();
 
@@ -35,7 +34,8 @@ export default function KennectAppBar() {
   };
 
   const logout = () => {
-    cookies.remove("access_token");
+    Cookies.remove("access_token");
+
     push("/login");
   };
 

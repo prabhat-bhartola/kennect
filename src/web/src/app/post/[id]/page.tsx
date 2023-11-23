@@ -7,6 +7,7 @@ import { useCommentList } from "@/api-sdk/hooks/comment.hook";
 import CreateComment from "@/common/components/create_comment.component";
 import Spinner from "@/common/components/spinner.component";
 import StaticPost from "@/common/components/static_post.component";
+import { Comment } from "@/api-sdk/models/Comment";
 
 interface pageProps {
   params: { id: string };
@@ -54,7 +55,7 @@ const Page: FC<pageProps> = ({ params }) => {
         {isLoadingComments ? (
           <Spinner />
         ) : (
-          comments.map((comment) => (
+          comments.map((comment: Comment) => (
             <StaticPost
               key={comment._id}
               id={comment._id}

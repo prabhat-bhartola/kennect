@@ -7,12 +7,16 @@ import { LoadingButton } from "@mui/lab";
 import { useState } from "react";
 import PostService from "@/api-sdk/services/post.service";
 
+interface CreatePost {
+  content: string;
+}
+
 function CreatePost() {
   const [msg, setMsg] = useState("");
   const [disableButton, setDisableButton] = useState(true);
   const [loadingButton, setLoadingButton] = useState(false);
 
-  const handleSubmit = (values) => {
+  const handleSubmit = (values: CreatePost) => {
     setDisableButton(true);
     setLoadingButton(true);
 

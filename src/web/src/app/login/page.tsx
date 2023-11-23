@@ -14,14 +14,18 @@ import { useState } from "react";
 import { LoadingButton } from "@mui/lab";
 import KennectTextField from "@/common/components/kennect_text_field.component";
 import AuthService from "@/api-sdk/services/auth.service";
-import { useCookies } from "next-client-cookies";
 import { useRouter } from "next/navigation";
+import Cookies from "js-cookie";
+
+interface UserLogin {
+  username: string;
+  password: string;
+}
 
 export default function Login() {
-  const cookies = useCookies();
   const { push } = useRouter();
 
-  const handleSubmit = (values) => {
+  const handleSubmit = (values: UserLogin) => {
     const data = {
       // username: "prabhat1811",
       // password: "SecretStr",
@@ -29,9 +33,14 @@ export default function Login() {
       password: values.password,
     };
     AuthService.signup(data).then((data) => {
-      cookies.set("access_token", data.access_token);
+      Cookies.set("access_token", data.access_token);
       push("/");
     });
+  };
+
+  const initialLoginValues = {
+    username: "",
+    password: "",
   };
 
   return (
@@ -56,7 +65,7 @@ export default function Login() {
 
         <Formik
           enableReinitialize
-          initialValues={() => {}}
+          initialValues={initialLoginValues}
           onSubmit={handleSubmit}
         >
           <Form>

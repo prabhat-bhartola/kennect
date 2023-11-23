@@ -5,6 +5,10 @@ import { LoadingButton } from "@mui/lab";
 import { useState } from "react";
 import CommentService from "@/api-sdk/services/comment.service";
 
+interface CreateComment {
+  comment: string;
+}
+
 interface Props {
   post_id: string;
   mutate: any;
@@ -15,7 +19,7 @@ function CreateComment(props: Props) {
   const [disableButton, setDisableButton] = useState(true);
   const [loadingButton, setLoadingButton] = useState(false);
 
-  const handleSubmit = (values) => {
+  const handleSubmit = (values: CreateComment) => {
     setDisableButton(true);
     setLoadingButton(true);
 

@@ -6,6 +6,7 @@ import styles from "./page.module.css";
 import Post from "@/common/components/post.component";
 import { usePostList } from "@/api-sdk/hooks/post.hook";
 import Spinner from "@/common/components/spinner.component";
+import { PostModel } from "@/api-sdk/models/Post";
 
 export default function Home() {
   const { posts, isLoading, isError, mutate } = usePostList();
@@ -20,7 +21,7 @@ export default function Home() {
     <main className={styles.main}>
       <Box sx={{ p: 0, m: 0, width: { xs: "100%", md: "50%" } }}>
         <Typography variant="h4">All Post</Typography>
-        {posts?.map((post) => (
+        {posts?.map((post: PostModel) => (
           <Post
             key={post._id}
             id={post._id}

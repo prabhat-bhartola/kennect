@@ -14,7 +14,7 @@ export default function Home() {
 
   return (
     <main className={styles.main}>
-      <Box sx={{ p: 0, m: 0, width: "50%" }}>
+      <Box sx={{ p: 0, m: 0, width: { xs: "100%", md: "50%" } }}>
         {posts.map((post) => (
           <Post
             key={post._id}

@@ -1,5 +1,4 @@
 from typing import List, Optional
-from uuid import UUID
 
 from app.common.common import uid
 from app.common.models import UserMin
@@ -28,7 +27,7 @@ async def startup():
     response_description="Search post document with id.",
 )
 async def get_post_by_id(
-    post_id: UUID, current_user: CurrentUser = Depends(get_current_user)
+    post_id: str, current_user: CurrentUser = Depends(get_current_user)
 ):
     search_criteria = {"_id": uid(post_id)}
 

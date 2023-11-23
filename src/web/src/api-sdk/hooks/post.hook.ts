@@ -17,3 +17,19 @@ export function usePostList() {
     mutate,
   };
 }
+
+export function usePost(id: string) {
+  const key = `${PostService.basePath}`;
+
+  const { data, error, isLoading, mutate } = useSWR(
+    `${key}/${id}`,
+    HttpService.getFetcher()
+  );
+
+  return {
+    post: data,
+    isLoading,
+    isError: error,
+    mutate,
+  };
+}

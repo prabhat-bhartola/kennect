@@ -68,7 +68,6 @@ function Post(props: Props) {
           <Box sx={{ display: "flex", flexDirection: "column" }}>
             <CardContent>
               <Typography>{content}</Typography>
-              <Typography>{username}</Typography>
             </CardContent>
           </Box>
         </CardActionArea>

@@ -1,9 +1,13 @@
+"use client";
+
 import axios, {
   AxiosInstance,
   AxiosRequestConfig,
   AxiosResponse,
   AxiosHeaders,
 } from "axios";
+
+import Cookies from "js-cookie";
 
 class HttpService {
   // singleton instance of axios
@@ -12,7 +16,7 @@ class HttpService {
   private static instance: HttpService;
 
   private baseUrl: string;
-  public static accessToken = "";
+  public static accessToken: string = "";
 
   // constructor
   private constructor() {
@@ -22,6 +26,7 @@ class HttpService {
   public static getInstance(): HttpService {
     if (!HttpService.instance) HttpService.instance = new HttpService();
     HttpService.instance.initClient();
+    HttpService.accessToken = Cookies.get("access_token") || "";
     return HttpService.instance;
   }
 
@@ -40,21 +45,21 @@ class HttpService {
       baseURL: this.baseUrl,
     });
 
-    // http.interceptors.request.use(
-    //   (config) => {
-    //     const newConfig: AxiosRequestConfig = config;
-    //     newConfig.headers = { ...newConfig.headers } as AxiosHeaders;
-    //     if (HttpService.accessToken !== "") {
-    //       newConfig.headers = newConfig.headers ?? {};
-    //       // @ts-ignore
-    //       newConfig.headers.Authorization = `Bearer ${HttpService.accessToken}`;
-    //     }
-    //     return config;
-    //   },
-    //   (error) => {
-    //     Promise.reject(error);
-    //   }
-    // );
+    http.interceptors.request.use(
+      (config) => {
+        const newConfig: AxiosRequestConfig = config;
+        newConfig.headers = { ...newConfig.headers } as AxiosHeaders;
+        if (HttpService.accessToken !== "") {
+          newConfig.headers = newConfig.headers ?? {};
+          // @ts-ignore
+          newConfig.headers.Authorization = `Bearer ${HttpService.accessToken}`;
+        }
+        return config;
+      },
+      (error) => {
+        Promise.reject(error);
+      }
+    );
 
     return http;
   }
@@ -91,6 +96,16 @@ class HttpService {
 
   public static getBaseUrl() {
     return `${HttpService.instance.baseUrl}`;
+  }
+
+  public static getFetcher<Type>() {
+    const fetcher = (url: string) => {
+      const client = HttpService.getClient();
+
+      return client.get(url).then((res) => res.data);
+    };
+
+    return fetcher;
   }
 }
 

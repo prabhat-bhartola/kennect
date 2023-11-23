@@ -1,7 +1,5 @@
 from typing import List, Optional
-from uuid import UUID
 
-from app.common.common import uid
 from app.common.models import UserMin
 from app.config import KennectConfig
 from app.services.auth.models import CurrentUser
@@ -10,7 +8,7 @@ from app.services.posts.utils import get_post_by_id
 from beanie import init_beanie
 from fastapi import APIRouter, Body, Depends, HTTPException, status
 from motor.motor_asyncio import AsyncIOMotorClient
-from pymongo import DESCENDING
+from pymongo import ASCENDING
 
 from .models import Comment, CommentIn
 
@@ -29,15 +27,15 @@ async def startup():
     response_description="Get all Comments.",
 )
 async def get_all_comments_for_post(
-    post_id: UUID,
+    post_id: str,
     limit: int = 25,
     skip: int = 0,
     current_user: CurrentUser = Depends(get_current_user),
 ):
-    search_criteria = {"post_id": uid(post_id)}
+    search_criteria = {"post_id": post_id}
 
     all_comments = (
-        await Comment.find(search_criteria).sort([(Comment.created_at, DESCENDING)])
+        await Comment.find(search_criteria).sort([(Comment.created_at, ASCENDING)])
         # Will need for pagination
         # .skip(skip)
         # .limit(limit)

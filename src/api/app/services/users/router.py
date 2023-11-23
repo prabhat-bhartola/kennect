@@ -22,13 +22,12 @@ async def startup():
 
 
 @router.get(
-    "/{user_id}",
+    "/me",
     response_model=UserBase,
-    response_description="Search user document with id.",
+    response_description="Get user document using access_token.",
 )
-async def get_user_by_id(
-    user_id, current_user: CurrentUser = Depends(get_current_user)
-):
+async def get_user_by_id(current_user: CurrentUser = Depends(get_current_user)):
+    user_id = current_user.id
     search_criteria = {"_id": uid(user_id)}
 
     user: Optional[UserBase] = await User.find_one(search_criteria)

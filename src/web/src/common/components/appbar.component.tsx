@@ -1,18 +1,24 @@
 "use client";
 
 import * as React from "react";
-import { styled, alpha } from "@mui/material/styles";
 import AppBar from "@mui/material/AppBar";
 import Box from "@mui/material/Box";
 import Toolbar from "@mui/material/Toolbar";
 import IconButton from "@mui/material/IconButton";
 import Typography from "@mui/material/Typography";
-import InputBase from "@mui/material/InputBase";
 
 import { Menu, MenuItem } from "@mui/material";
 import AccountCircle from "@mui/icons-material/AccountCircle";
+import Link from "next/link";
+import { useUser } from "@/api-sdk/hooks/user.hook";
+import { useCookies } from "next-client-cookies";
+import { useRouter } from "next/navigation";
 
 export default function KennectAppBar() {
+  const cookies = useCookies();
+  const { user, isLoading, isError, mutate } = useUser();
+  const { push } = useRouter();
+
   const [auth, setAuth] = React.useState(true);
   const [anchorEl, setAnchorEl] = React.useState<null | HTMLElement>(null);
 
@@ -27,6 +33,12 @@ export default function KennectAppBar() {
   const handleClose = () => {
     setAnchorEl(null);
   };
+
+  const logout = () => {
+    cookies.remove("access_token");
+    push("/login");
+  };
+
   return (
     <Box sx={{ flexGrow: 1 }}>
       <AppBar position="static" sx={{ px: "10%" }}>
@@ -37,7 +49,7 @@ export default function KennectAppBar() {
             component="div"
             sx={{ flexGrow: 1, display: { xs: "none", sm: "block" } }}
           >
-            Post&Kennect
+            <Link href={"/"}>Post&Kennect</Link>
           </Typography>
 
           <div>
@@ -66,8 +78,8 @@ export default function KennectAppBar() {
               open={Boolean(anchorEl)}
               onClose={handleClose}
             >
-              <MenuItem onClick={handleClose}>Profile</MenuItem>
-              <MenuItem onClick={handleClose}>Logout</MenuItem>
+              <MenuItem disabled>{user?.username}</MenuItem>
+              <MenuItem onClick={logout}>Logout</MenuItem>
             </Menu>
           </div>
         </Toolbar>

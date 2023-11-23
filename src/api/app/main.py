@@ -15,7 +15,7 @@ APIs for kennect. 🐝
 
 app = FastAPI(title="kennectAPI", description=description)
 
-origins = ["http://localhost:3000"]
+origins = ["http://localhost:3000", "https://kennect-psi.vercel.app"]
 
 app.add_middleware(
     CORSMiddleware,

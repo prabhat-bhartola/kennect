@@ -6,4 +6,4 @@ pymongo==4.3.3
 typing==3.7.4.3
 pre_commit
 passlib==1.7.4
-python-dotenv==1.0.0
+python-dotenv

@@ -41,13 +41,13 @@ export default function KennectAppBar() {
 
   return (
     <Box sx={{ flexGrow: 1 }}>
-      <AppBar position="static" sx={{ px: "10%" }}>
+      <AppBar position="static" sx={{ px: { xs: "0%", sm: "10%" } }}>
         <Toolbar>
           <Typography
             variant="h6"
             noWrap
             component="div"
-            sx={{ flexGrow: 1, display: { xs: "none", sm: "block" } }}
+            sx={{ flexGrow: 1, display: { sm: "block" } }}
           >
             <Link href={"/"}>Post&Kennect</Link>
           </Typography>

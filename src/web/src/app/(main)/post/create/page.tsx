@@ -40,7 +40,7 @@ function CreatePost() {
   };
 
   return (
-    <Box sx={{ mx: "25%", mt: "10%" }}>
+    <Box sx={{ mx: { xs: "10%", sm: "25%" }, mt: "10%" }}>
       <Typography variant="h6">New Post</Typography>
       <Formik
         enableReinitialize

@@ -24,19 +24,23 @@ export default function Home() {
   }
 
   return (
-    <main className={styles.main}>
-      <Box sx={{ p: 0, m: 0, width: { xs: "100%", md: "50%" } }}>
-        <Typography variant="h4">All Posts</Typography>
-        {posts?.map((post: PostModel) => (
-          <Post
-            key={post._id}
-            id={post._id}
-            content={post.content}
-            username={post.user.username}
-            created_at={post.created_at}
-          />
-        ))}
-      </Box>
-    </main>
+    <Box
+      sx={{
+        p: 0,
+        m: 0,
+        mx: { xs: "10%", sm: "25%" },
+      }}
+    >
+      <Typography variant="h4">All Posts</Typography>
+      {posts?.map((post: PostModel) => (
+        <Post
+          key={post._id}
+          id={post._id}
+          content={post.content}
+          username={post.user.username}
+          created_at={post.created_at}
+        />
+      ))}
+    </Box>
   );
 }

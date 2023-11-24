@@ -30,7 +30,7 @@ export default function Login() {
   const [disableButton, setDisableButton] = useState(true);
   const [loadingButton, setLoadingButton] = useState(false);
 
-  const handleSubmit = (values: UserLogin) => {
+  const handleSubmit = async (values: UserLogin) => {
     setDisableButton(true);
     setLoadingButton(true);
 

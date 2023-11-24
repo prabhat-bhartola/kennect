@@ -13,7 +13,6 @@ import { Form, Formik } from "formik";
 import { useState } from "react";
 import { LoadingButton } from "@mui/lab";
 import KennectTextField from "@/common/components/kennect_text_field.component";
-import { useRouter } from "next/navigation";
 import UserService from "@/api-sdk/services/user.service";
 import Link from "next/link";
 
@@ -23,8 +22,6 @@ interface UserSignup {
 }
 
 export default function Signup() {
-  const { push } = useRouter();
-
   const [msg, setMsg] = useState("");
   const [disableButton, setDisableButton] = useState(false);
 
@@ -106,7 +103,7 @@ export default function Signup() {
                 content="Save"
                 size="large"
                 type="submit"
-                disabled={disableButton}
+                disabled={!disableButton}
                 loading={disableButton}
               >
                 {"signup"}

@@ -82,18 +82,12 @@ export default function Signup() {
                   isDisabled={false}
                   label="Username"
                   name="username"
-                  onChangeHandler={() => {
-                    setDisableButton(false);
-                  }}
                 />
                 <KennectTextField
                   variant="outlined"
                   isDisabled={false}
                   label="Password"
                   name="password"
-                  onChangeHandler={() => {
-                    setDisableButton(false);
-                  }}
                 />
               </Stack>
             </Box>
@@ -103,7 +97,6 @@ export default function Signup() {
                 content="Save"
                 size="large"
                 type="submit"
-                disabled={!disableButton}
                 loading={disableButton}
               >
                 {"signup"}

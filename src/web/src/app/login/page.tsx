@@ -16,6 +16,7 @@ import KennectTextField from "@/common/components/kennect_text_field.component";
 import AuthService from "@/api-sdk/services/auth.service";
 import { useRouter } from "next/navigation";
 import Cookies from "js-cookie";
+import Link from "next/link";
 
 interface UserLogin {
   username: string;
@@ -25,17 +26,31 @@ interface UserLogin {
 export default function Login() {
   const { push } = useRouter();
 
+  const [msg, setMsg] = useState("");
+  const [disableButton, setDisableButton] = useState(true);
+  const [loadingButton, setLoadingButton] = useState(false);
+
   const handleSubmit = (values: UserLogin) => {
+    setDisableButton(true);
+    setLoadingButton(true);
+
     const data = {
-      // username: "prabhat1811",
-      // password: "SecretStr",
       username: values.username,
       password: values.password,
     };
-    AuthService.signup(data).then((data) => {
-      Cookies.set("access_token", data.access_token);
-      push("/");
-    });
+    AuthService.signup(data)
+      .then((data) => {
+        Cookies.set("access_token", data.access_token);
+        push("/");
+      })
+      .catch((data) => {
+        setMsg(data.response.data.detail);
+        setDisableButton(false);
+        setLoadingButton(false);
+      });
+
+    setDisableButton(false);
+    setLoadingButton(false);
   };
 
   const initialLoginValues = {
@@ -76,14 +91,18 @@ export default function Login() {
                   isDisabled={false}
                   label="Username"
                   name="username"
-                  onChangeHandler={() => {}}
+                  onChangeHandler={() => {
+                    setDisableButton(false);
+                  }}
                 />
                 <KennectTextField
                   variant="outlined"
                   isDisabled={false}
                   label="Password"
                   name="password"
-                  onChangeHandler={() => {}}
+                  onChangeHandler={() => {
+                    setDisableButton(false);
+                  }}
                 />
               </Stack>
             </Box>
@@ -93,14 +112,18 @@ export default function Login() {
                 content="Save"
                 size="large"
                 type="submit"
-                disabled={false}
-                loading={false}
+                disabled={disableButton}
+                loading={loadingButton}
               >
                 {"Login"}
               </LoadingButton>
             </DialogActions>
           </Form>
         </Formik>
+        <Typography>
+          Dont have an account? <Link href={"/signup"}>Signup</Link>
+        </Typography>
+        <Typography color="red">{msg}</Typography>
       </CardContent>
     </Card>
   );

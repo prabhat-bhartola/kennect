@@ -7,8 +7,14 @@ import Post from "@/common/components/post.component";
 import { usePostList } from "@/api-sdk/hooks/post.hook";
 import Spinner from "@/common/components/spinner.component";
 import { PostModel } from "@/api-sdk/models/Post";
+import Cookies from "js-cookie";
+import { redirect } from "next/navigation";
 
 export default function Home() {
+  if (Cookies.get("access_token") === undefined) {
+    redirect("/login");
+  }
+
   const { posts, isLoading, isError, mutate } = usePostList();
   if (isLoading) {
     return <Spinner />;

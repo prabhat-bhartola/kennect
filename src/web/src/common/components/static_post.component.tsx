@@ -77,14 +77,15 @@ function StaticPost(props: Props) {
             justifyContent: "space-between",
           }}
         >
-          <Typography>{date.toLocaleDateString()}</Typography>
           <Typography>
             {date.toLocaleTimeString("en-US", {
-              hour12: false,
+              hour12: true,
               hour: "2-digit",
               minute: "2-digit",
-            })}
+            })}{" "}
+            UTC
           </Typography>
+          <Typography>{date.toLocaleDateString()}</Typography>
         </Box>
       </CardActionArea>
     </Card>

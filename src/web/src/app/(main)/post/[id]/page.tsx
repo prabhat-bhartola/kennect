@@ -42,6 +42,7 @@ const Page: FC<pageProps> = ({ params }) => {
           width: { xs: "100%", md: "50%" },
         }}
       >
+        <Typography variant="h5">Post</Typography>
         <StaticPost
           key={post._id}
           id={post._id}
@@ -50,7 +51,7 @@ const Page: FC<pageProps> = ({ params }) => {
           created_at={post.created_at}
         />
         <Divider sx={{ mt: "25px" }} />
-        <Typography>Comments</Typography>
+        <Typography variant="h6">Comments</Typography>
         {isLoadingComments ? (
           <Spinner />
         ) : (
@@ -64,6 +65,7 @@ const Page: FC<pageProps> = ({ params }) => {
             />
           ))
         )}
+        <Typography>Add a new comment</Typography>
         <CreateComment post_id={post._id} mutate={mutateComments} />
       </Box>
     </Box>

@@ -14,7 +14,6 @@ import { useState } from "react";
 import { LoadingButton } from "@mui/lab";
 import KennectTextField from "@/common/components/kennect_text_field.component";
 import { useRouter } from "next/navigation";
-import Cookies from "js-cookie";
 import UserService from "@/api-sdk/services/user.service";
 import Link from "next/link";
 
@@ -27,12 +26,10 @@ export default function Signup() {
   const { push } = useRouter();
 
   const [msg, setMsg] = useState("");
-  const [disableButton, setDisableButton] = useState(true);
-  const [loadingButton, setLoadingButton] = useState(false);
+  const [disableButton, setDisableButton] = useState(false);
 
   const handleSubmit = (values: UserSignup) => {
     setDisableButton(true);
-    setLoadingButton(true);
 
     const data = {
       username: values.username,
@@ -43,14 +40,11 @@ export default function Signup() {
         setMsg("User Created!");
       })
       .catch((data) => {
-        console.log(data);
         setMsg(data.response.data.detail[0].msg || data.response.data.detail);
         setDisableButton(false);
-        setLoadingButton(false);
       });
 
     setDisableButton(false);
-    setLoadingButton(false);
   };
 
   const initialLoginValues = {
@@ -113,7 +107,7 @@ export default function Signup() {
                 size="large"
                 type="submit"
                 disabled={disableButton}
-                loading={loadingButton}
+                loading={disableButton}
               >
                 {"signup"}
               </LoadingButton>

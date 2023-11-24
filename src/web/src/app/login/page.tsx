@@ -27,12 +27,10 @@ export default function Login() {
   const { push } = useRouter();
 
   const [msg, setMsg] = useState("");
-  const [disableButton, setDisableButton] = useState(true);
-  const [loadingButton, setLoadingButton] = useState(false);
+  const [disableButton, setDisableButton] = useState(false);
 
   const handleSubmit = async (values: UserLogin) => {
     setDisableButton(true);
-    setLoadingButton(true);
 
     const data = {
       username: values.username,
@@ -46,11 +44,9 @@ export default function Login() {
       .catch((data) => {
         setMsg(data.response.data.detail);
         setDisableButton(false);
-        setLoadingButton(false);
       });
 
     setDisableButton(false);
-    setLoadingButton(false);
   };
 
   const initialLoginValues = {
@@ -113,7 +109,7 @@ export default function Login() {
                 size="large"
                 type="submit"
                 disabled={disableButton}
-                loading={loadingButton}
+                loading={disableButton}
               >
                 {"Login"}
               </LoadingButton>

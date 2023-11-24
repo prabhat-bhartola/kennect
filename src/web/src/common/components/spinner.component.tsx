@@ -1,13 +1,17 @@
 "use client";
 
-import { CircularProgress } from "@mui/material";
+import { Box, CircularProgress } from "@mui/material";
 
 function Spinner() {
   return (
-    <CircularProgress
-      color="success"
-      sx={{ mx: "auto", justifyContent: "center" }}
-    />
+    <Box
+      sx={{
+        display: "flex",
+        justifyContent: "center",
+      }}
+    >
+      <CircularProgress color="success" />
+    </Box>
   );
 }
 

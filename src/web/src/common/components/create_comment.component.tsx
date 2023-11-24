@@ -1,3 +1,5 @@
+"use client";
+
 import { Box, DialogActions, Grid } from "@mui/material";
 import { Form, Formik } from "formik";
 import KennectTextField from "./kennect_text_field.component";

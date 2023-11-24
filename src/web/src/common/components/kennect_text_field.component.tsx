@@ -1,3 +1,5 @@
+"use client";
+
 import { SxProps, TextField, TextFieldVariants } from "@mui/material";
 import { useField } from "formik";
 

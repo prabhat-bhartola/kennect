@@ -31,7 +31,6 @@ const Page: FC<pageProps> = ({ params }) => {
   return (
     <Box
       sx={{
-        height: "100vh",
         px: "10%",
         pt: "5%",
         display: "flex",

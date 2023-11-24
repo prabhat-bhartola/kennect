@@ -26,7 +26,7 @@ export default function Home() {
   return (
     <main className={styles.main}>
       <Box sx={{ p: 0, m: 0, width: { xs: "100%", md: "50%" } }}>
-        <Typography variant="h4">All Post</Typography>
+        <Typography variant="h4">All Posts</Typography>
         {posts?.map((post: PostModel) => (
           <Post
             key={post._id}

@@ -26,6 +26,8 @@ interface Props {
 function Post(props: Props) {
   const { id, content, username, created_at } = props;
 
+  const date = new Date(created_at);
+
   return (
     <Card
       sx={{
@@ -39,17 +41,20 @@ function Post(props: Props) {
         <CardActionArea
           sx={{
             display: "flex",
-            justifyContent: "start",
-            flexDirection: "row",
-            pl: "10%",
+            justifyContent: "left",
+            flexDirection: "column",
+            px: "5%",
+            alignItems: "left",
+            pt: "15px",
           }}
         >
           <Box
             sx={{
               display: "flex",
               flexDirection: "row",
-              alignItems: "center",
-              justifyContent: "space-around",
+              alignItems: "left",
+              justifyContent: "start",
+              width: "100%",
             }}
           >
             <AccountCircle />
@@ -57,18 +62,35 @@ function Post(props: Props) {
               sx={{
                 display: "flex",
                 flexDirection: "column",
-                alignItems: "center",
+                alignItems: "left",
                 justifyContent: "space-around",
+                pl: "10px",
               }}
             >
               <Typography>{username}</Typography>
-              <Typography>{created_at}</Typography>
             </Box>
           </Box>
-          <Box sx={{ display: "flex", flexDirection: "column" }}>
+          <Box sx={{ display: "flex", flexDirection: "column", width: "100%" }}>
             <CardContent>
               <Typography>{content}</Typography>
             </CardContent>
+          </Box>
+          <Box
+            sx={{
+              display: "flex",
+              flexDirection: "row",
+              width: "100%",
+              justifyContent: "space-between",
+            }}
+          >
+            <Typography>{date.toLocaleDateString()}</Typography>
+            <Typography>
+              {date.toLocaleTimeString("en-US", {
+                hour12: false,
+                hour: "2-digit",
+                minute: "2-digit",
+              })}
+            </Typography>
           </Box>
         </CardActionArea>
       </MyLink>

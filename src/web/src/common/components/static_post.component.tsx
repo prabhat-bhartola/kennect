@@ -21,6 +21,8 @@ interface Props {
 function StaticPost(props: Props) {
   const { id, content, username, created_at } = props;
 
+  const date = new Date(created_at);
+
   return (
     <Card
       sx={{
@@ -30,33 +32,61 @@ function StaticPost(props: Props) {
         marginBottom: "10px",
       }}
     >
-      <Box
+      <CardActionArea
         sx={{
           display: "flex",
-          flexDirection: "row",
-          alignItems: "center",
-          justifyContent: "space-around",
-          pl: "10%",
+          justifyContent: "left",
+          flexDirection: "column",
+          px: "5%",
+          alignItems: "left",
+          pt: "15px",
         }}
       >
-        <AccountCircle />
         <Box
           sx={{
             display: "flex",
-            flexDirection: "column",
-            alignItems: "center",
-            justifyContent: "space-around",
+            flexDirection: "row",
+            alignItems: "left",
+            justifyContent: "start",
+            width: "100%",
           }}
         >
-          <Typography>{username}</Typography>
-          <Typography>{created_at}</Typography>
+          <AccountCircle />
+          <Box
+            sx={{
+              display: "flex",
+              flexDirection: "column",
+              alignItems: "left",
+              justifyContent: "space-around",
+              pl: "10px",
+            }}
+          >
+            <Typography>{username}</Typography>
+          </Box>
         </Box>
-      </Box>
-      <Box sx={{ display: "flex", flexDirection: "column" }}>
-        <CardContent>
-          <Typography>{content}</Typography>
-        </CardContent>
-      </Box>
+        <Box sx={{ display: "flex", flexDirection: "column", width: "100%" }}>
+          <CardContent>
+            <Typography>{content}</Typography>
+          </CardContent>
+        </Box>
+        <Box
+          sx={{
+            display: "flex",
+            flexDirection: "row",
+            width: "100%",
+            justifyContent: "space-between",
+          }}
+        >
+          <Typography>{date.toLocaleDateString()}</Typography>
+          <Typography>
+            {date.toLocaleTimeString("en-US", {
+              hour12: false,
+              hour: "2-digit",
+              minute: "2-digit",
+            })}
+          </Typography>
+        </Box>
+      </CardActionArea>
     </Card>
   );
 }

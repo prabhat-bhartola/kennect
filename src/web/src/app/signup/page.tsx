@@ -117,8 +117,8 @@ export default function Signup() {
           mx: "5%",
         }}
       >
-        As I'm running this on free server, The backend may take some time to
-        spin up
+        As I&#39;m running this on free server, The backend may take some time
+        to spin up
       </Typography>
     </Card>
   );

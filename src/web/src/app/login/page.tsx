@@ -114,6 +114,17 @@ export default function Login() {
         </Typography>
         <Typography color="red">{msg}</Typography>
       </CardContent>
+      <Typography
+        color="green"
+        sx={{
+          display: "flex",
+          justifyContent: "center",
+          mx: "5%",
+        }}
+      >
+        As I'm running this on free server, The backend may take some time to
+        spin up
+      </Typography>
     </Card>
   );
 }

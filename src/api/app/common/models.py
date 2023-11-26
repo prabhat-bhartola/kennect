@@ -27,6 +27,12 @@ class User(CustomBaseModel, Document):
             raise ValueError("Password must be atleast 8 characters long.")
         return v
 
+    @validator("username")
+    def validate_username(cls, v):
+        if len(v) < 3:
+            raise ValueError("Username must be atleast 3 characters long.")
+        return v
+
     def set_default_values(user):
         user.password = get_password_hash(user.password.get_secret_value())
 

@@ -1,3 +1,6 @@
+## 🗂 Entity Relationship Diagram
+
+```mermaid
 erDiagram
     ITEM {
         string id PK "Random string ID"
